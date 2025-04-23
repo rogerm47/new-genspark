@@ -1,984 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roger Malek | AI & Automation Specialist</title>
-    <meta name="description" content="Roger Malek offers AI solutions, n8n process automation, website development, business presentations, and prompt engineering services. Based in Manchester.">
-    <meta name="keywords" content="AI, n8n automation, workflow automation, process automation, prompt engineering, website development, business presentations, Manchester">
-    <meta name="author" content="Roger Malek">
-    <meta property="og:title" content="Roger Malek | AI & Automation Specialist">
-    <meta property="og:description" content="AI solutions, n8n process automation, website development, business presentations, and prompt engineering services.">
-    <meta property="og:url" content="https://www.rogermalek.com">
-    <meta property="og:type" content="website">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
-    <style>
-        :root {
-            --primary: #2e1065;
-            --secondary: #4f46e5;
-            --accent: #10b981;
-            --dark-bg: #121212;
-            --dark-card: #1e1e1e;
-            --light-bg: #f8fafc;
-            --light-card: #ffffff;
-            --text-dark: #f8fafc;
-            --text-light: #1e293b;
-        }
-        
-        body {
-            transition: background-color 0.3s ease, color 0.3s ease;
-            background-color: var(--light-bg);
-            color: var(--text-light);
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-        }
-        
-        body.dark-mode {
-            background-color: var(--dark-bg);
-            color: var(--text-dark);
-        }
-        
-        .card {
-            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-            background-color: var(--light-card);
-            border-radius: 0.75rem;
-        }
-        
-        body.dark-mode .card {
-            background-color: var(--dark-card);
-        }
-        
-        .primary-gradient {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-        }
-        
-        .accent-gradient {
-            background: linear-gradient(135deg, var(--secondary), var(--accent));
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
-        }
-        
-        .primary-btn {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            transition: all 0.3s ease;
-        }
-        
-        .primary-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .accent-btn {
-            background: linear-gradient(135deg, var(--secondary), var(--accent));
-            color: white;
-            transition: all 0.3s ease;
-        }
-        
-        .accent-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 24px;
-        }
-        
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 24px;
-        }
-        
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 16px;
-            width: 16px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-        
-        input:checked + .slider {
-            background-color: var(--accent);
-        }
-        
-        input:checked + .slider:before {
-            transform: translateX(26px);
-        }
-        
-        .icon-container {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-        
-        .icon-container:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(79, 70, 229, 0.5);
-        }
-        
-        .social-icon {
-            transition: all 0.3s ease;
-            color: var(--text-light);
-        }
-        
-        body.dark-mode .social-icon {
-            color: var(--text-dark);
-        }
-        
-        .social-icon:hover {
-            color: var(--accent);
-        }
-        
-        /* Price cards hover effect */
-        .price-card {
-            transition: all 0.3s ease;
-            transform-style: preserve-3d;
-        }
-        
-        .price-card:hover {
-            transform: rotateY(5deg);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: var(--light-bg);
-        }
-        
-        body.dark-mode::-webkit-scrollbar-track {
-            background: var(--dark-bg);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--secondary);
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary);
-        }
-        
-        /* Animation for elements */
-        .animate-float {
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .staggered-fade-in > * {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-        
-        .staggered-fade-in.visible > * {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .staggered-fade-in.visible > *:nth-child(1) { transition-delay: 0.1s; }
-        .staggered-fade-in.visible > *:nth-child(2) { transition-delay: 0.2s; }
-        .staggered-fade-in.visible > *:nth-child(3) { transition-delay: 0.3s; }
-        .staggered-fade-in.visible > *:nth-child(4) { transition-delay: 0.4s; }
-        .staggered-fade-in.visible > *:nth-child(5) { transition-delay: 0.5s; }
-        
-        .service-icon {
-            font-size: 2rem;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            color: white;
-            margin-bottom: 1rem;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Roger Malek AI Agency: Next-gen AI consulting, automation with n8n, websites, prompt engineering, and business presentations. Boost productivity and save costs!">
+  <meta name="keywords" content="AI, automation, n8n, website development, AI consulting, prompt engineering, business presentations, Netlify, Roger Malek, Manchester">
+  <meta name="author" content="Roger Malek AI Agency">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Orbitron:700|Montserrat:400,600&display=swap" rel="stylesheet">
+  <title>Roger Malek AI Agency | Automation, Websites, AI Consulting</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(135deg, #141D2B 0%, #0e0825 100%);
+      color: #ececf7;
+      min-height: 100vh;
+    }
+    .font-orbitron {
+      font-family: 'Orbitron', Arial, sans-serif;
+      letter-spacing: 0.05em;
+    }
+    .darkmode {
+      background: linear-gradient(125deg, #181c30 0%, #231847 100%) !important;
+      color: #f7faff !important;
+    }
+    .transition-bg {
+      transition: background 0.3s, color 0.3s;
+    }
+    .glow {
+      text-shadow: 0px 0px 10px #61f2ff, 0px 0px 1px #fff;
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, #61f2ff, #8b5cf6, #07f7d7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight:bold;
+    }
+    .accent {
+      color: #7e8bff;
+    }
+    .pricing-highlight {
+      background: linear-gradient(90deg, #7009fa 30%, #2cf5e6 100%);
+      color: #fff !important;
+      box-shadow: 0 4px 24px #2cf5e661;
+    }
+    .ai-img {
+      border-radius: 1em;
+      border:2px solid #2cf5e6;
+    }
+    .floating-btn {
+      transition: transform 0.18s;
+    }
+    .floating-btn:hover { transform: scale(1.13) translateY(-4px); }
+    .icon-interactive:hover { color: #00d2ff !important;}
+    /* Hide scrollbars for cleaner PDF export */
+    ::-webkit-scrollbar { display:none;}
+    section { scroll-margin-top: 80px;}
+    @media print {
+      body { background: #fff !important; color: #000 !important;}
+      .darkmode { background: #fff !important; color: #000 !important;}
+      .hide-print { display: none !important;}
+    }
+  </style>
+  <script>
+    // Dark Mode Toggle Handler
+    function toggleDarkMode() {
+      document.body.classList.toggle('darkmode');
+      document.querySelectorAll('section, header, footer').forEach(el => el.classList.toggle('darkmode'));
+      localStorage.setItem('darkmode', document.body.classList.contains('darkmode') ? '1' : '0');
+      document.getElementById('dm-icon').className = document.body.classList.contains('darkmode')
+        ? 'fa-solid fa-moon'
+        : 'fa-solid fa-sun';
+    }
+    window.addEventListener('DOMContentLoaded',()=>{
+      if(localStorage.getItem('darkmode') === '1') {
+        document.body.classList.add('darkmode');
+        document.querySelectorAll('section, header, footer').forEach(el => el.classList.add('darkmode'));
+        document.getElementById('dm-icon').className = 'fa-solid fa-moon';
+      }
+    });
+  </script>
 </head>
-<body>
-    <!-- Header Section -->
-    <header class="sticky top-0 z-50 bg-opacity-90 backdrop-filter backdrop-blur-lg py-4 shadow-md transition-all duration-300" id="header">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <div class="flex items-center">
-                <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-800 to-indigo-600">
-                    Roger Malek
-                </h1>
-            </div>
-            
-            <div class="flex items-center space-x-6">
-                <nav class="hidden md:flex space-x-6">
-                    <a href="#services" class="hover:text-indigo-500 transition-colors duration-300">Services</a>
-                    <a href="#automations" class="hover:text-indigo-500 transition-colors duration-300">Automations</a>
-                    <a href="#pricing" class="hover:text-indigo-500 transition-colors duration-300">Pricing</a>
-                    <a href="#contact" class="hover:text-indigo-500 transition-colors duration-300">Contact</a>
-                </nav>
-                
-                <div class="flex items-center space-x-4">
-                    <div class="flex items-center">
-                        <span class="mr-2"><i class="fas fa-sun"></i></span>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="darkModeToggle">
-                            <span class="slider"></span>
-                        </label>
-                        <span class="ml-2"><i class="fas fa-moon"></i></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+<body class="transition-bg">
 
-    <!-- Hero Section -->
-    <section class="py-16 md:py-24">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-8 md:mb-0">
-                    <div class="staggered-fade-in visible">
-                        <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                            <span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-800 to-indigo-600">
-                                Transform Your Business
-                            </span> 
-                            <br>with AI & Automation
-                        </h1>
-                        <p class="text-lg md:text-xl mb-8 opacity-90">
-                            Streamline workflows, automate processes, and leverage AI to save time and boost efficiency. Specializing in n8n automation, prompt engineering, and custom web solutions.
-                        </p>
-                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                            <a href="#contact" class="primary-btn px-8 py-3 rounded-full font-bold text-center">
-                                Get Started
-                            </a>
-                            <a href="#services" class="border border-indigo-500 text-indigo-600 hover:bg-indigo-50 px-8 py-3 rounded-full font-bold text-center transition-colors duration-300 dark:hover:bg-indigo-900">
-                                Explore Services
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="md:w-1/2 flex justify-center">
-                    <div class="relative animate-float">
-                        <div class="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg blur opacity-75"></div>
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original-wordmark.svg" alt="AI and Automation" class="relative w-full max-w-md h-auto rounded-lg shadow-xl">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <header class="w-full bg-gradient-to-r from-indigo-900 via-purple-900 to-blue-950 px-4 py-6 flex flex-col md:flex-row justify-between items-center shadow-lg sticky top-0 z-30 transition-bg">
+    <div class="flex items-center mb-2 md:mb-0">
+      <span class="font-orbitron tracking-wide text-2xl gradient-text glow mr-4">Roger Malek AI Agency</span>
+      <button onclick="toggleDarkMode()" class="ml-3 text-xl transition-colors icon-interactive" title="Toggle Dark Mode">
+        <i id="dm-icon" class="fa-solid fa-sun"></i>
+      </button>
+    </div>
+    <nav class="flex space-x-4 mt-2 md:mt-0">
+      <a href="#services" class="hover:text-cyan-300 accent">Services</a>
+      <a href="#pricing" class="hover:text-cyan-300 accent">Pricing</a>
+      <a href="#testimonials" class="hover:text-cyan-300 accent">Testimonials</a>
+      <a href="#contact" class="hover:text-cyan-300 accent">Contact</a>
+      <a href="#blog" class="hover:text-cyan-300 accent">Blog</a>
+    </nav>
+  </header>
 
-    <!-- Services Section -->
-    <section id="services" class="py-16 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
-                <p class="text-lg opacity-80 max-w-2xl mx-auto">
-                    Comprehensive solutions tailored to modernize your business operations and enhance productivity
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- AI Solutions -->
-                <div class="card p-6 shadow-lg">
-                    <div class="service-icon primary-gradient">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">AI Integration</h3>
-                    <p class="opacity-80 mb-4">
-                        Implement cutting-edge AI solutions to streamline decision-making and automate complex tasks.
-                    </p>
-                    <ul class="space-y-2 mb-4">
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Custom AI model implementation</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Intelligent automation workflows</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Predictive analytics solutions</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- n8n Automation -->
-                <div class="card p-6 shadow-lg">
-                    <div class="service-icon accent-gradient">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">n8n Automation</h3>
-                    <p class="opacity-80 mb-4">
-                        Automate workflows and connect services using n8n's powerful workflow automation platform.
-                    </p>
-                    <ul class="space-y-2 mb-4">
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Custom workflow development</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Integration with 400+ services</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Self-hosted or cloud solutions</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- Web Development -->
-                <div class="card p-6 shadow-lg">
-                    <div class="service-icon primary-gradient">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Web Development</h3>
-                    <p class="opacity-80 mb-4">
-                        Create modern, responsive websites optimized for performance and conversion.
-                    </p>
-                    <ul class="space-y-2 mb-4">
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Custom website development</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Progressive web applications</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>E-commerce solutions</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- Business Presentations -->
-                <div class="card p-6 shadow-lg">
-                    <div class="service-icon accent-gradient">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Business Presentations</h3>
-                    <p class="opacity-80 mb-4">
-                        Create impactful business presentations that convey your message clearly and effectively.
-                    </p>
-                    <ul class="space-y-2 mb-4">
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Professional slide design</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Data visualization</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Storytelling & narrative structure</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- Prompt Engineering -->
-                <div class="card p-6 shadow-lg">
-                    <div class="service-icon primary-gradient">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Prompt Engineering</h3>
-                    <p class="opacity-80 mb-4">
-                        Optimize interactions with AI systems through expert prompt design and engineering.
-                    </p>
-                    <ul class="space-y-2 mb-4">
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Custom prompt development</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>AI output optimization</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>LLM integration & fine-tuning</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- Process Optimization -->
-                <div class="card p-6 shadow-lg">
-                    <div class="service-icon accent-gradient">
-                        <i class="fas fa-dharmachakra"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Process Optimization</h3>
-                    <p class="opacity-80 mb-4">
-                        Streamline business processes and eliminate inefficiencies to boost productivity.
-                    </p>
-                    <ul class="space-y-2 mb-4">
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Workflow analysis & redesign</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Business process automation</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Efficiency auditing & reporting</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- n8n Information Section -->
-    <section class="py-16 bg-gradient-to-r from-purple-900 to-indigo-800 text-white">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-8 md:mb-0">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Power Your Business with n8n Automation</h2>
-                    <p class="text-lg mb-6 opacity-90">
-                        n8n is a powerful workflow automation platform that uniquely combines AI capabilities with business process automation.
-                    </p>
-                    <p class="text-lg mb-6 opacity-90">
-                        With over 400+ integrations, n8n gives technical teams the flexibility of code with the speed of no-code, allowing you to:
-                    </p>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-400 mt-1 mr-3"></i>
-                            <span>Automate repetitive tasks across your business</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-400 mt-1 mr-3"></i>
-                            <span>Connect disparate systems for seamless data flow</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-400 mt-1 mr-3"></i>
-                            <span>Leverage AI for intelligent process automation</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-400 mt-1 mr-3"></i>
-                            <span>Choose between self-hosted or cloud deployment</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="md:w-1/2 flex justify-center">
-                    <div class="bg-white bg-opacity-10 p-8 rounded-xl backdrop-filter backdrop-blur-lg shadow-2xl">
-                        <div class="text-center mb-6">
-                            <i class="fas fa-cogs text-5xl text-indigo-300 mb-4"></i>
-                            <h3 class="text-2xl font-bold">Why Choose n8n?</h3>
-                        </div>
-                        <ul class="space-y-4">
-                            <li class="flex items-start">
-                                <i class="fas fa-bolt text-yellow-400 mt-1 mr-3 text-lg"></i>
-                                <div>
-                                    <h4 class="font-bold">Flexibility</h4>
-                                    <p class="opacity-80">Combine visual building with custom code for maximum control</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-shield-alt text-green-400 mt-1 mr-3 text-lg"></i>
-                                <div>
-                                    <h4 class="font-bold">Security</h4>
-                                    <p class="opacity-80">Self-host for complete data control and privacy</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-plug text-blue-400 mt-1 mr-3 text-lg"></i>
-                                <div>
-                                    <h4 class="font-bold">Integrations</h4>
-                                    <p class="opacity-80">Connect with 400+ services and applications</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-brain text-purple-400 mt-1 mr-3 text-lg"></i>
-                                <div>
-                                    <h4 class="font-bold">AI Capabilities</h4>
-                                    <p class="opacity-80">Native AI integration for intelligent automation</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- HERO -->
+  <section class="w-full pt-14 pb-8 px-5 md:px-32 bg-transparent text-center">
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-orbitron gradient-text glow mb-5">
+        Next-Gen <span class="accent">AI Automation</span> & Web Innovation
+      </h1>
+      <p class="text-xl text-gray-100 font-light mb-6">Supercharge your business with <span class="font-semibold accent">seamless automation, stunning websites</span>, and <span class="font-semibold accent">AI consultation</span>.<br> Based in <b>Manchester</b>, serving the world, one automation at a time.</p>
+      <a href="#contact" class="inline-block px-7 py-3 bg-gradient-to-r from-indigo-600 to-cyan-400 text-white rounded-xl font-semibold transition floating-btn text-lg shadow-lg mt-1 accent">
+        Let's Talk <i class="fa-regular fa-comments ml-2"></i>
+      </a>
+    </div>
+    <div class="flex justify-center mt-8 gap-8">
+      <img src="https://images.pexels.com/photos/110854/pexels-photo-110854.jpeg?auto=compress&w=400&fit=crop" alt="AI Brain" class="ai-img w-28 h-28 object-cover shadow-xl">
+      <img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&w=400&fit=crop" alt="Automation network" class="ai-img w-28 h-28 object-cover shadow-xl">
+      <img src="https://images.pexels.com/photos/843700/pexels-photo-843700.jpeg?auto=compress&w=400&fit=crop" alt="n8n process" class="ai-img w-28 h-28 object-cover shadow-xl">
+    </div>
+  </section>
 
-    <!-- Automation Examples Section -->
-    <section id="automations" class="py-16 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Automation Examples</h2>
-                <p class="text-lg opacity-80 max-w-2xl mx-auto">
-                    See how our automation solutions can save you time and money with these practical examples
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Example 1 -->
-                <div class="card p-6 shadow-lg">
-                    <div class="h-40 mb-4 flex items-center justify-center bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg overflow-hidden">
-                        <i class="fas fa-wpforms text-5xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Website Form to Google Sheets</h3>
-                    <p class="opacity-80">
-                        Automatically send contact form submissions directly to Google Sheets for easy tracking and management.
-                    </p>
-                    <div class="mt-4 flex items-center text-sm text-indigo-600 dark:text-indigo-400">
-                        <i class="fas fa-clock mr-2"></i>
-                        <span>Saves ~5 hours monthly</span>
-                    </div>
-                </div>
-                
-                <!-- Example 2 -->
-                <div class="card p-6 shadow-lg">
-                    <div class="h-40 mb-4 flex items-center justify-center bg-gradient-to-br from-blue-500 to-teal-400 rounded-lg overflow-hidden">
-                        <i class="fas fa-file-pdf text-5xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">PDF Invoices to Google Sheets</h3>
-                    <p class="opacity-80">
-                        Extract data from PDF invoices and automatically populate Google Sheets for streamlined accounting.
-                    </p>
-                    <div class="mt-4 flex items-center text-sm text-indigo-600 dark:text-indigo-400">
-                        <i class="fas fa-clock mr-2"></i>
-                        <span>Saves ~8 hours monthly</span>
-                    </div>
-                </div>
-                
-                <!-- Example 3 -->
-                <div class="card p-6 shadow-lg">
-                    <div class="h-40 mb-4 flex items-center justify-center bg-gradient-to-br from-emerald-500 to-green-400 rounded-lg overflow-hidden">
-                        <i class="fas fa-shopping-cart text-5xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Online Store Orders to Sheets</h3>
-                    <p class="opacity-80">
-                        Sync your online store orders to Google Sheets in real-time for improved inventory and order management.
-                    </p>
-                    <div class="mt-4 flex items-center text-sm text-indigo-600 dark:text-indigo-400">
-                        <i class="fas fa-clock mr-2"></i>
-                        <span>Saves ~10 hours monthly</span>
-                    </div>
-                </div>
-                
-                <!-- Example 4 -->
-                <div class="card p-6 shadow-lg">
-                    <div class="h-40 mb-4 flex items-center justify-center bg-gradient-to-br from-yellow-500 to-orange-400 rounded-lg overflow-hidden">
-                        <i class="fas fa-users text-5xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Add New Customers Automatically</h3>
-                    <p class="opacity-80">
-                        New customer data is automatically added to Google Sheets without manual data entry, reducing errors.
-                    </p>
-                    <div class="mt-4 flex items-center text-sm text-indigo-600 dark:text-indigo-400">
-                        <i class="fas fa-clock mr-2"></i>
-                        <span>Saves ~6 hours monthly</span>
-                    </div>
-                </div>
-                
-                <!-- Example 5 -->
-                <div class="card p-6 shadow-lg">
-                    <div class="h-40 mb-4 flex items-center justify-center bg-gradient-to-br from-pink-500 to-red-400 rounded-lg overflow-hidden">
-                        <i class="fas fa-calendar-check text-5xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Event Registrations to Sheets</h3>
-                    <p class="opacity-80">
-                        Automatically capture event registrations in Google Sheets for simplified attendee management.
-                    </p>
-                    <div class="mt-4 flex items-center text-sm text-indigo-600 dark:text-indigo-400">
-                        <i class="fas fa-clock mr-2"></i>
-                        <span>Saves ~7 hours monthly</span>
-                    </div>
-                </div>
-                
-                <!-- Custom Example -->
-                <div class="card p-6 shadow-lg border-2 border-dashed border-indigo-300 dark:border-indigo-700 bg-opacity-50">
-                    <div class="h-40 mb-4 flex items-center justify-center rounded-lg overflow-hidden">
-                        <i class="fas fa-lightbulb text-6xl text-indigo-500 dark:text-indigo-400 animate-pulse"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Custom Automation</h3>
-                    <p class="opacity-80">
-                        Have a specific automation need? I can create custom solutions tailored to your unique business requirements.
-                    </p>
-                    <a href="#contact" class="mt-4 inline-block text-indigo-600 dark:text-indigo-400 font-bold hover:underline">
-                        Discuss your needs <i class="fas fa-arrow-right ml-1"></i>
-                    </a>
-                </div>
-            </div>
+  <!-- SERVICES -->
+  <section id="services" class="py-12 bg-gradient-to-b from-blue-950 to-purple-900 px-5 md:px-32 transition-bg">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-orbitron gradient-text glow mb-5 text-center">What We Do</h2>
+      <div class="grid md:grid-cols-3 gap-10 text-gray-100">
+        <!-- Service 1 -->
+        <div class="bg-gradient-to-b from-indigo-800 to-blue-900 rounded-xl shadow-lg p-7">
+          <div class="text-4xl mb-3 accent">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <h3 class="font-semibold text-lg mb-2">Process Automation<br> <span class="accent">with n8n</span></h3>
+          <p class="text-sm mb-2">Automate repetitive business processes, connect your favourite tools and save hours every week.</p>
         </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section id="pricing" class="py-16">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Pricing Plans</h2>
-                <p class="text-lg opacity-80 max-w-2xl mx-auto">
-                    Flexible pricing options to meet your automation needs, billed monthly
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Consultation Plan -->
-                <div class="price-card card shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Consultation</h3>
-                        <div class="text-3xl font-bold mb-4">Free</div>
-                        <p class="opacity-80 mb-6">Initial discovery call to understand your automation needs</p>
-                        <ul class="space-y-3 mb-8">
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>30-minute strategy session</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Needs assessment</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Solution recommendations</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Custom quote</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="p-6 bg-gray-50 dark:bg-gray-800">
-                        <a href="#contact" class="block w-full py-2 px-4 bg-indigo-100 hover:bg-indigo-200 dark:bg-indigo-900 dark:hover:bg-indigo-800 text-indigo-700 dark:text-indigo-300 font-bold rounded-lg text-center transition-colors duration-300">
-                            Book Now
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Basic Plan -->
-                <div class="price-card card shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Basic</h3>
-                        <div class="text-3xl font-bold mb-4">£219<span class="text-lg opacity-70">/month</span></div>
-                        <p class="opacity-80 mb-6">Perfect for small businesses starting with automation</p>
-                        <ul class="space-y-3 mb-8">
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span><strong>3 automations</strong></span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Setup & implementation</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Documentation</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Email support</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="p-6 bg-gray-50 dark:bg-gray-800">
-                        <a href="#contact" class="block w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg text-center transition-colors duration-300">
-                            Get Started
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Pro Plan -->
-                <div class="price-card card shadow-xl border-2 border-indigo-500 dark:border-indigo-400 overflow-hidden transform scale-105 z-10">
-                    <div class="bg-indigo-500 text-white text-center py-1 text-sm font-bold">
-                        MOST POPULAR
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Pro</h3>
-                        <div class="text-3xl font-bold mb-4">£399<span class="text-lg opacity-70">/month</span></div>
-                        <p class="opacity-80 mb-6">Ideal for growing businesses with multiple automation needs</p>
-                        <ul class="space-y-3 mb-8">
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span><strong>5 automations</strong></span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Setup & implementation</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Documentation & training</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Priority email support</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Monthly maintenance</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="p-6 bg-indigo-50 dark:bg-indigo-900">
-                        <a href="#contact" class="block w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg text-center transition-colors duration-300">
-                            Get Started
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Enterprise Plan -->
-                <div class="price-card card shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Enterprise</h3>
-                        <div class="text-3xl font-bold mb-4">£830<span class="text-lg opacity-70">/month</span></div>
-                        <p class="opacity-80 mb-6">Comprehensive solution for businesses with complex automation needs</p>
-                        <ul class="space-y-3 mb-8">
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span><strong>10 automations</strong></span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Custom solution development</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Documentation & training</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>24/7 priority support</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Weekly maintenance</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Quarterly strategy sessions</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="p-6 bg-gray-50 dark:bg-gray-800">
-                        <a href="#contact" class="block w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg text-center transition-colors duration-300">
-                            Get Started
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-12 text-center">
-                <p class="italic opacity-80">All plans include full setup and configuration. Need a custom plan? Contact me for a tailored solution.</p>
-            </div>
+        <!-- Service 2 -->
+        <div class="bg-gradient-to-b from-slate-900 to-indigo-800 rounded-xl shadow-lg p-7">
+          <div class="text-4xl mb-3 accent">
+            <i class="fa-solid fa-globe"></i>
+          </div>
+          <h3 class="font-semibold text-lg mb-2">Modern Websites</h3>
+          <p class="text-sm mb-2">Cutting-edge responsive websites built for speed, style, and seamless user experiences.</p>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row">
-                <div class="md:w-1/2 mb-8 md:mb-0 pr-0 md:pr-8">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Get in Touch</h2>
-                    <p class="text-lg mb-6 opacity-80">
-                        Ready to transform your business with automation? Reach out to discuss how I can help streamline your workflows.
-                    </p>
-                    <div class="mb-8">
-                        <div class="flex items-center mb-4">
-                            <div class="icon-container bg-indigo-100 dark:bg-indigo-900 mr-4">
-                                <i class="fas fa-envelope text-indigo-600 dark:text-indigo-400"></i>
-                            </div>
-                            <a href="mailto:rogermalek1987@gmail.com" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-300">
-                                rogermalek1987@gmail.com
-                            </a>
-                        </div>
-                        <div class="flex items-center mb-4">
-                            <div class="icon-container bg-indigo-100 dark:bg-indigo-900 mr-4">
-                                <i class="fas fa-map-marker-alt text-indigo-600 dark:text-indigo-400"></i>
-                            </div>
-                            <span>Manchester, United Kingdom</span>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="icon-container bg-indigo-100 dark:bg-indigo-900 mr-4">
-                                <i class="fas fa-globe text-indigo-600 dark:text-indigo-400"></i>
-                            </div>
-                            <a href="https://www.rogermalek.com" target="_blank" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-300">
-                                www.rogermalek.com
-                            </a>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold mb-4">Connect with me</h3>
-                        <div class="flex space-x-4">
-                            <a href="#" class="social-icon" aria-label="Instagram">
-                                <div class="icon-container bg-gradient-to-br from-purple-500 to-pink-500">
-                                    <i class="fab fa-instagram text-white"></i>
-                                </div>
-                            </a>
-                            <a href="#" class="social-icon" aria-label="LinkedIn">
-                                <div class="icon-container bg-blue-600">
-                                    <i class="fab fa-linkedin-in text-white"></i>
-                                </div>
-                            </a>
-                            <a href="#" class="social-icon" aria-label="Twitter">
-                                <div class="icon-container bg-sky-500">
-                                    <i class="fab fa-twitter text-white"></i>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="md:w-1/2">
-                    <div class="card p-8 shadow-xl">
-                        <h3 class="text-2xl font-bold mb-6">Send a Message</h3>
-                        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                            <p class="hidden">
-                                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-                            </p>
-                            <input type="hidden" name="form-name" value="contact" />
-                            <div class="mb-6">
-                                <label for="name" class="block mb-2 font-medium">Name</label>
-                                <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:text-white" required>
-                            </div>
-                            <div class="mb-6">
-                                <label for="email" class="block mb-2 font-medium">Email</label>
-                                <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:text-white" required>
-                            </div>
-                            <div class="mb-6">
-                                <label for="subject" class="block mb-2 font-medium">Subject</label>
-                                <input type="text" id="subject" name="subject" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:text-white" required>
-                            </div>
-                            <div class="mb-6">
-                                <label for="message" class="block mb-2 font-medium">Message</label>
-                                <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:text-white" required></textarea>
-                            </div>
-                            <button type="submit" class="primary-btn w-full py-3 px-6 rounded-lg font-bold">
-                                Send Message
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+        <!-- Service 3 -->
+        <div class="bg-gradient-to-b from-teal-900 to-blue-900 rounded-xl shadow-lg p-7">
+          <div class="text-4xl mb-3 accent">
+            <i class="fa-solid fa-user-astronaut"></i>
+          </div>
+          <h3 class="font-semibold text-lg mb-2">AI Consulting &<br>Prompt Engineering</h3>
+          <p class="text-sm mb-2">Turbocharge business intelligence, create effective prompts, and deploy AI solutions that deliver ROI.</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer with QR code -->
-    <footer class="py-12 bg-gray-800 text-white">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center justify-between">
-                <div class="mb-8 md:mb-0 text-center md:text-left">
-                    <h3 class="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-500">
-                        Roger Malek
-                    </h3>
-                    <p class="opacity-80 mb-4">AI & Automation Specialist</p>
-                    <p class="opacity-60 text-sm">© 2025 Roger Malek. All rights reserved.</p>
-                </div>
-                
-                <div class="text-center">
-                    <p class="mb-2 font-medium text-lg">Scan to visit my website</p>
-                    <div class="inline-block p-2 bg-white rounded-lg">
-                        <svg id="qr-code" class="w-32 h-32"></svg>
-                    </div>
-                    <p class="mt-2 text-sm opacity-80">www.rogermalek.com</p>
-                </div>
-            </div>
+  <!-- AUTOMATION EXAMPLES -->
+  <section class="py-12 px-5 md:px-32 bg-gradient-to-b from-purple-900 to-indigo-900 transition-bg">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-2xl font-orbitron gradient-text mb-4">5 Powerful Automation Examples (n8n + Google Sheets)</h2>
+      <div class="grid md:grid-cols-5 gap-5 text-center mt-6">
+        <div class="bg-gray-900 bg-opacity-80 rounded-xl p-5 shadow-md flex flex-col items-center">
+          <i class="fa-solid fa-address-card text-2xl mb-2 accent"></i>
+          <span class="font-semibold mb-1">Website <br>Contacts</span>
+          <p class="text-xs text-gray-300">Site form submissions piped directly to Google Sheets.</p>
         </div>
-    </footer>
+        <div class="bg-gray-900 bg-opacity-80 rounded-xl p-5 shadow-md flex flex-col items-center">
+          <i class="fa-solid fa-file-invoice-dollar text-2xl mb-2 accent"></i>
+          <span class="font-semibold mb-1">Invoice <br>Extraction</span>
+          <p class="text-xs text-gray-300">PDF invoice data instantly parsed & tracked in Sheets.</p>
+        </div>
+        <div class="bg-gray-900 bg-opacity-80 rounded-xl p-5 shadow-md flex flex-col items-center">
+          <i class="fa-solid fa-store text-2xl mb-2 accent"></i>
+          <span class="font-semibold mb-1">Ecommerce<br> Orders</span>
+          <p class="text-xs text-gray-300">All store orders logged live into Sheets for management.</p>
+        </div>
+        <div class="bg-gray-900 bg-opacity-80 rounded-xl p-5 shadow-md flex flex-col items-center">
+          <i class="fa-solid fa-user-plus text-2xl mb-2 accent"></i>
+          <span class="font-semibold mb-1">New <br>Customers</span>
+          <p class="text-xs text-gray-300">Add customers to Sheets without manual effort.</p>
+        </div>
+        <div class="bg-gray-900 bg-opacity-80 rounded-xl p-5 shadow-md flex flex-col items-center">
+          <i class="fa-solid fa-calendar-days text-2xl mb-2 accent"></i>
+          <span class="font-semibold mb-1">Event <br>Registrations</span>
+          <p class="text-xs text-gray-300">Event signups automatically updated in Sheets.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- QR Code Generator Script -->
-    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-    <script>
-        // Initialize QR code
-        document.addEventListener('DOMContentLoaded', function() {
-            new QRCode(document.getElementById("qr-code"), {
-                text: "https://www.rogermalek.com",
-                width: 128,
-                height: 128,
-                colorDark: "#4f46e5",
-                colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.H
-            });
-        });
-        
-        // Dark mode toggle
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const body = document.body;
-        
-        // Check for saved user preference
-        if (localStorage.getItem('darkMode') === 'true') {
-            body.classList.add('dark-mode');
-            darkModeToggle.checked = true;
-        }
-        
-        // Toggle dark mode
-        darkModeToggle.addEventListener('change', function() {
-            if (this.checked) {
-                body.classList.add('dark-mode');
-                localStorage.setItem('darkMode', 'true');
-            } else {
-                body.classList.remove('dark-mode');
-                localStorage.setItem('darkMode', 'false');
-            }
-        });
-        
-        // Elements fade-in animation when scrolling
-        const fadeInElements = document.querySelectorAll('.staggered-fade-in');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-        
-        fadeInElements.forEach(element => {
-            observer.observe(element);
-        });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
+  <!-- PRICING -->
+  <section id="pricing" class="py-12 px-5 md:px-32 bg-gradient-to-b from-indigo-900 to-slate-900 transition-bg">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-orbitron gradient-text mb-8 text-center">Flexible Pricing Plans</h2>
+      <div class="grid md:grid-cols-4 gap-8 mt-4">
+        <!-- Pricing plan: Basic -->
+        <div class="rounded-2xl bg-slate-900 shadow-xl p-7 text-center border-2 border-cyan-400">
+          <h3 class="font-semibold text-lg">Basic</h3>
+          <div class="my-3 text-3xl font-bold text-cyan-300">£199<span class="text-base text-gray-400 font-normal">/mo</span></div>
+          <ul class="text-sm mb-4">
+            <li>✅ 1 Automation</li>
+            <li>Email Support</li>
+          </ul>
+          <a href="#contact" class="inline-block px-4 py-2 bg-cyan-600 rounded-xl text-white hover:bg-cyan-500 transition floating-btn">Start</a>
+        </div>
+        <!-- Pricing plan: Pro -->
+        <div class="rounded-2xl pricing-highlight shadow-xl p-7 text-center border-2 border-purple-500 scale-105">
+          <h3 class="font-semibold text-lg">Pro</h3>
+          <div class="my-3 text-3xl font-bold">£399<span class="text-base text-gray-200 font-normal">/mo</span></div>
+          <ul class="text-sm mb-4">
+            <li>✅ 3 Automations</li>
+            <li>Email & Chat Support</li>
+            <li>Priority Setup</li>
+          </ul>
+          <a href="#contact" class="inline-block px-4 py-2 bg-black bg-opacity-60 rounded-xl text-white hover:bg-gray-800 transition floating-btn">Start</a>
+        </div>
+        <!-- Pricing plan: Enterprise -->
+        <div class="rounded-2xl bg-slate-900 shadow-xl p-7 text-center border-2 border-pink-400">
+          <h3 class="font-semibold text-lg">Enterprise</h3>
+          <div class="my-3 text-3xl font-bold text-pink-300">£830<span class="text-base text-gray-400 font-normal">/mo</span></div>
+          <ul class="text-sm mb-4">
+            <li>✅ 8 Automations</li>
+            <li>Dedicated AI Expert</li>
+            <li>24/7 Priority Support</li>
+          </ul>
+          <a href="#contact" class="inline-block px-4 py-2 bg-pink-600 rounded-xl text-white hover:bg-pink-500 transition floating-btn">Start</a>
+        </div>
+        <!-- Pricing plan: Consultation -->
+        <div class="rounded-2xl bg-gradient-to-b from-teal-900 to-cyan-700 shadow-xl p-7 text-center border-2 border-cyan-200">
+          <h3 class="font-semibold text-lg">Consultation</h3>
+          <div class="my-3 text-3xl font-bold text-cyan-200">Free</div>
+          <ul class="text-sm mb-4">
+            <li>✅ 30-min AI Consultation</li>
+            <li>Personalized Advice</li>
+            <li>Strategic Roadmap</li>
+          </ul>
+          <a href="#contact" class="inline-block px-4 py-2 bg-black bg-opacity-30 rounded-xl text-white hover:bg-black hover:bg-opacity-50 transition floating-btn">Book Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="py-12 px-5 md:px-32 transition-bg bg-gradient-to-b from-slate-900 to-blue-950">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-orbitron gradient-text mb-6 text-center">What Clients Say</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-indigo-950 bg-opacity-85 rounded-2xl p-6 shadow-xl flex flex-col">
+          <p class="text-lg">"Roger's automation has eliminated hours of manual work. My invoices and orders are now in Sheets instantly!"</p>
+          <div class="flex items-center mt-3">
+            <img src="https://randomuser.me/api/portraits/men/14.jpg" class="rounded-full w-10 h-10 mr-3 border-2 border-cyan-400" alt="Client photo">
+            <div>
+              <span class="font-bold">James T.</span> <br>
+              <span class="text-xs text-gray-400">Ecommerce Manager</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-blue-950 bg-opacity-85 rounded-2xl p-6 shadow-xl flex flex-col">
+          <p class="text-lg">"The website Roger built is fast, beautiful and gets results! Highly recommend his prompt engineering services too."</p>
+          <div class="flex items-center mt-3">
+            <img src="https://randomuser.me/api/portraits/women/32.jpg" class="rounded-full w-10 h-10 mr-3 border-2 border-pink-300" alt="Client photo">
+            <div>
+              <span class="font-bold">Sophie W.</span> <br>
+              <span class="text-xs text-gray-400">Startup Founder</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-purple-950 bg-opacity-85 rounded-2xl p-6 shadow-xl flex flex-col">
+          <p class="text-lg">"AI consultation sessions opened new growth paths for us. Roger is a real AI wizard!"</p>
+          <div class="flex items-center mt-3">
+            <img src="https://randomuser.me/api/portraits/men/4.jpg" class="rounded-full w-10 h-10 mr-3 border-2 border-purple-400" alt="Client photo">
+            <div>
+              <span class="font-bold">Alex K.</span><br>
+              <span class="text-xs text-gray-400">Product Lead</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-14 px-5 md:px-32 bg-gradient-to-b from-blue-950 to-black transition-bg">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl font-orbitron gradient-text mb-8 text-center">Contact Us</h2>
+      <div class="flex flex-col md:flex-row gap-8">
+        <!-- Contact Info -->
+        <div class="md:w-1/2 flex flex-col items-center md:items-start">
+          <!-- Email: Interactive Icon -->
+          <a href="mailto:rogermalek1987@gmail.com" class="flex items-center text-lg mb-5 accent icon-interactive">
+            <span class="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 via-fuchsia-600 to-indigo-600 text-white text-xl mr-3 shadow-lg icon-interactive">
+              <i class="fa-solid fa-envelope"></i>
+            </span>
+            rogermalek1987@gmail.com
+          </a>
+          <!-- Socials -->
+          <div class="flex space-x-4 text-2xl mt-3">
+            <a href="https://instagram.com" target="_blank" class="icon-interactive transition-colors" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com" target="_blank" class="icon-interactive transition-colors" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://twitter.com" target="_blank" class="icon-interactive transition-colors" title="Twitter"><i class="fab fa-twitter"></i></a>
+          </div>
+          <div class="mt-6">
+            <span class="inline-flex items-center text-sm text-gray-300 accent"><i class="fa-solid fa-location-dot mr-2"></i> Manchester, UK</span>
+          </div>
+        </div>
+        <!-- Contact Form (Netlify) -->
+        <form name="contact" method="POST" data-netlify="true" class="md:w-1/2 bg-gradient-to-br from-indigo-900 to-cyan-900 rounded-xl p-7 shadow-xl text-gray-100" netlify>
+          <input type="hidden" name="form-name" value="contact" />
+          <label class="block text-sm mb-1" for="name">Name</label>
+          <input id="name" name="name" type="text" required class="w-full rounded-lg mb-3 px-3 py-2 bg-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition" placeholder="Your Name">
+          <label class="block text-sm mb-1" for="email">Email</label>
+          <input id="email" name="email" type="email" required class="w-full rounded-lg mb-3 px-3 py-2 bg-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition" placeholder="Your Email">
+          <label class="block text-sm mb-1" for="message">Message</label>
+          <textarea id="message" name="message" rows="3" required class="w-full rounded-lg mb-4 px-3 py-2 bg-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition" placeholder="How can we help?"></textarea>
+          <button type="submit" class="w-full bg-gradient-to-r from-pink-600 to-cyan-400 rounded-xl py-2 px-4 text-white font-semibold accent floating-btn transition" aria-label="Send Message">
+            <i class="fa-solid fa-paper-plane mr-1"></i> Send
+          </button>
+          <p class="mt-2 text-xs text-gray-400">We'll reply within 24 hours.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG SECTION -->
+  <section id="blog" class="py-14 px-5 md:px-32 bg-gradient-to-b from-black to-blue-950 transition-bg">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-orbitron gradient-text mb-7 text-center">Roger's Blog <i class="fa-regular fa-pen-to-square"></i></h2>
+      <p class="text-lg text-center text-gray-300 mb-7">Personal thoughts, discoveries, and musings about the future of AI, automation, and prompt engineering.</p>
+      <!-- Placeholder Article -->
+      <article class="bg-slate-900 rounded-xl shadow-xl p-7 mb-7">
+        <h3 class="text-xl font-semibold mb-2 accent">Welcome to My AI Blog!</h3>
+        <p class="text-md text-gray-200">Here, I share insights on using automation to change modern business, tips for working smarter with AI, and personal stories from the fast-evolving world of n8n and Large Language Models. Come back soon for updates.</p>
+      </article>
+      <!-- To add more: New articles can be manually added above -->
+    </div>
+  </section>
+
+  <!-- QR + Footer -->
+  <footer class="pt-12 pb-6 px-6 bg-gradient-to-r from-indigo-900 via-blue-950 to-purple-900 mt-4 transition-bg">
+    <div class="max-w-3xl mx-auto flex flex-col items-center">
+      <span class="block text-lg font-orbitron mb-2 gradient-text glow">Scan to visit: <span class="underline font-semibold">www.rogermalek.com</span></span>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://www.rogermalek.com" alt="QR code to www.rogermalek.com" class="w-36 h-36 mt-2 rounded-lg shadow-lg border-4 border-cyan-400"/>
+      <div class="mt-6 text-gray-300 text-sm text-center">
+        &copy; <span id="year"></span> Roger Malek AI Agency. All rights reserved.<br>
+        Modern AI Solutions | n8n Automation | Manchester
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').innerText = new Date().getFullYear();
+  </script>
 </body>
 </html>
+
