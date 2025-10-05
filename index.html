@@ -17,10 +17,43 @@
         body { font-family: 'Inter', sans-serif; }
         .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 300px; max-height: 400px; }
         @media (min-width: 768px) { .chart-container { height: 350px; } }
+        
+        /* Stepper Styles */
         .step-link.active .step-circle { background-color: #f59e0b; color: #ffffff; border-color: #f59e0b; }
         .step-link.active .step-text { font-weight: 700; color: #f59e0b; }
-        .step-link .step-circle { transition: all 0.3s ease; }
-        .step-link .step-text { transition: all 0.3s ease; }
+        .step-link .step-circle, .step-link .step-text { transition: all 0.3s ease; }
+
+        /* Tab Styles (Moved from JS for better organization) */
+        .tab-button {
+            padding: 8px 16px;
+            cursor: pointer;
+            font-weight: 600; /* Replaced prose class with explicit font-weight */
+            color: #475569; /* slate-600 */
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .tab-button:hover {
+            color: #1e293b; /* slate-800 */
+        }
+        .tab-button[aria-selected="true"] {
+            color: #f59e0b; /* amber-500 */
+            border-bottom-color: #f59e0b;
+        }
+
+        /* Simple spinner for form submission */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -56,7 +89,7 @@
                                 <span class="step-text font-semibold text-slate-600 group-hover:text-amber-600">Quote Package</span>
                             </a>
                         </li>
-<li>
+                        <li>
                             <a href="#step4" class="step-link group flex items-center space-x-3">
                                 <span class="step-circle h-8 w-8 flex items-center justify-center rounded-full border-2 border-slate-300 bg-slate-100 text-slate-500 font-bold group-hover:border-amber-500">4</span>
                                 <span class="step-text font-semibold text-slate-600 group-hover:text-amber-600">Follow-Up</span>
@@ -87,16 +120,16 @@
                         </div>
 
                         <div class="tabs-container" data-step="1">
-                            <div class="border-b border-slate-200 mb-4">
-                                <nav class="flex space-x-4" aria-label="Tabs">
-                                    <button class="tab-button active" data-target="goal-1">The Goal</button>
-                                    <button class="tab-button" data-target="why-1">Why It Works</button>
-                                    <button class="tab-button" data-target="action-1">Action</button>
+                            <div class="border-b border-slate-200 mb-4" role="tablist" aria-label="Step 1 Details">
+                                <nav class="flex space-x-4" >
+                                    <button class="tab-button" id="tab-goal-1" role="tab" aria-selected="true" aria-controls="panel-goal-1">The Goal</button>
+                                    <button class="tab-button" id="tab-why-1" role="tab" aria-selected="false" aria-controls="panel-why-1">Why It Works</button>
+                                    <button class="tab-button" id="tab-action-1" role="tab" aria-selected="false" aria-controls="panel-action-1">Action</button>
                                 </nav>
                             </div>
-                            <div class="tab-content" id="goal-1">Respond to every single website enquiry in under 5 minutes.</div>
-                            <div class="tab-content hidden" id="why-1">The first roofer to respond is statistically the most likely to win the job. Homeowners want speed. Being first makes you seem the most professional and eager for their business.</div>
-                            <div class="tab-content hidden" id="action-1">Set up instant email and SMS notifications from your website form so you or your team are alerted the second an enquiry comes in.</div>
+                            <div class="tab-content" id="panel-goal-1" role="tabpanel" tabindex="0" aria-labelledby="tab-goal-1">Respond to every single website enquiry in under 5 minutes.</div>
+                            <div class="tab-content hidden" id="panel-why-1" role="tabpanel" tabindex="0" aria-labelledby="tab-why-1">The first roofer to respond is statistically the most likely to win the job. Homeowners want speed. Being first makes you seem the most professional and eager for their business.</div>
+                            <div class="tab-content hidden" id="panel-action-1" role="tabpanel" tabindex="0" aria-labelledby="tab-action-1">Set up instant email and SMS notifications from your website form so you or your team are alerted the second an enquiry comes in.</div>
                         </div>
                     </div>
                 </section>
@@ -106,16 +139,16 @@
                     <div class="prose max-w-none prose-slate">
                        <p class="text-lg mb-6">Once you get a lead, making immediate and effective contact is crucial. A multi-channel approach ensures your message is received and positions you as a proactive professional.</p>
                         <div class="tabs-container" data-step="2">
-                            <div class="border-b border-slate-200 mb-4">
-                                <nav class="flex space-x-4" aria-label="Tabs">
-                                    <button class="tab-button active" data-target="goal-2">The Goal</button>
-                                    <button class="tab-button" data-target="why-2">Why It Works</button>
-                                    <button class="tab-button" data-target="action-2">Action</button>
+                            <div class="border-b border-slate-200 mb-4" role="tablist" aria-label="Step 2 Details">
+                                <nav class="flex space-x-4">
+                                    <button class="tab-button" id="tab-goal-2" role="tab" aria-selected="true" aria-controls="panel-goal-2">The Goal</button>
+                                    <button class="tab-button" id="tab-why-2" role="tab" aria-selected="false" aria-controls="panel-why-2">Why It Works</button>
+                                    <button class="tab-button" id="tab-action-2" role="tab" aria-selected="false" aria-controls="panel-action-2">Action</button>
                                 </nav>
                             </div>
-                            <div class="tab-content" id="goal-2">Contact the new lead via three different methods immediately.</div>
-                            <div class="tab-content hidden" id="why-2">People have preferred communication styles. Covering all bases ensures they see your message.</div>
-                            <div class="tab-content hidden" id="action-2">
+                            <div class="tab-content" id="panel-goal-2" role="tabpanel" tabindex="0" aria-labelledby="tab-goal-2">Contact the new lead via three different methods immediately.</div>
+                            <div class="tab-content hidden" id="panel-why-2" role="tabpanel" tabindex="0" aria-labelledby="tab-why-2">People have preferred communication styles. Covering all bases ensures they see your message.</div>
+                            <div class="tab-content hidden" id="panel-action-2" role="tabpanel" tabindex="0" aria-labelledby="tab-action-2">
                                 <ul class="list-disc pl-5 space-y-2">
                                     <li><strong>Send an Automated Email:</strong> "Thanks for your quote request for [Their Address]. We're reviewing the details and will call you in the next 5-10 minutes..."</li>
                                     <li><strong>Send an Automated SMS:</strong> "Hi [Name], just got your roofing quote request. Roger from [Your Company] here. I'll call you shortly from this number."</li>
@@ -131,16 +164,16 @@
                      <div class="prose max-w-none prose-slate">
                        <p class="text-lg mb-6">Your quote is your most important sales document. It must do more than just show a price—it must build confidence, eliminate risk, and make the homeowner feel certain that you are the right choice.</p>
                         <div class="tabs-container" data-step="3">
-                            <div class="border-b border-slate-200 mb-4">
-                                <nav class="flex space-x-4" aria-label="Tabs">
-                                    <button class="tab-button active" data-target="goal-3">The Goal</button>
-                                    <button class="tab-button" data-target="why-3">Why It Works</button>
-                                    <button class="tab-button" data-target="action-3">Action</button>
+                            <div class="border-b border-slate-200 mb-4" role="tablist" aria-label="Step 3 Details">
+                                <nav class="flex space-x-4">
+                                    <button class="tab-button" id="tab-goal-3" role="tab" aria-selected="true" aria-controls="panel-goal-3">The Goal</button>
+                                    <button class="tab-button" id="tab-why-3" role="tab" aria-selected="false" aria-controls="panel-why-3">Why It Works</button>
+                                    <button class="tab-button" id="tab-action-3" role="tab" aria-selected="false" aria-controls="panel-action-3">Action</button>
                                 </nav>
                             </div>
-                            <div class="tab-content" id="goal-3">Your quote should do more than just list a price; it should build trust and eliminate risk for the homeowner.</div>
-                            <div class="tab-content hidden" id="why-3">Homeowners are scared of being ripped off. A professional package makes your price seem more justified and makes you look like the safest choice.</div>
-                            <div class="tab-content hidden" id="action-3">
+                            <div class="tab-content" id="panel-goal-3" role="tabpanel" tabindex="0" aria-labelledby="tab-goal-3">Your quote should do more than just list a price; it should build trust and eliminate risk for the homeowner.</div>
+                            <div class="tab-content hidden" id="panel-why-3" role="tabpanel" tabindex="0" aria-labelledby="tab-why-3">Homeowners are scared of being ripped off. A professional package makes your price seem more justified and makes you look like the safest choice.</div>
+                            <div class="tab-content hidden" id="panel-action-3" role="tabpanel" tabindex="0" aria-labelledby="tab-action-3">
                                 <p>Always send your quote as a PDF that includes:</p>
                                 <ul class="list-disc pl-5 space-y-2">
                                     <li>Your Company Details & Logo</li>
@@ -159,16 +192,16 @@
                     <div class="prose max-w-none prose-slate">
                        <p class="text-lg mb-6">Most jobs are lost due to a lack of follow-up. A simple, systematic, and non-pushy follow-up sequence keeps you top-of-mind and shows the client you are organized and attentive.</p>
                         <div class="tabs-container" data-step="4">
-                            <div class="border-b border-slate-200 mb-4">
-                                <nav class="flex space-x-4" aria-label="Tabs">
-                                    <button class="tab-button active" data-target="goal-4">The Goal</button>
-                                    <button class="tab-button" data-target="why-4">Why It Works</button>
-                                    <button class="tab-button" data-target="action-4">Action</button>
+                            <div class="border-b border-slate-200 mb-4" role="tablist" aria-label="Step 4 Details">
+                                <nav class="flex space-x-4">
+                                    <button class="tab-button" id="tab-goal-4" role="tab" aria-selected="true" aria-controls="panel-goal-4">The Goal</button>
+                                    <button class="tab-button" id="tab-why-4" role="tab" aria-selected="false" aria-controls="panel-why-4">Why It Works</button>
+                                    <button class="tab-button" id="tab-action-4" role="tab" aria-selected="false" aria-controls="panel-action-4">Action</button>
                                 </nav>
                             </div>
-                            <div class="tab-content" id="goal-4">Follow up systematically without being annoying.</div>
-                            <div class="tab-content hidden" id="why-4">Life gets in the way. Most roofers never follow up. A simple, helpful follow-up sequence keeps you top of mind.</div>
-                            <div class="tab-content hidden" id="action-4">
+                            <div class="tab-content" id="panel-goal-4" role="tabpanel" tabindex="0" aria-labelledby="tab-goal-4">Follow up systematically without being annoying.</div>
+                            <div class="tab-content hidden" id="panel-why-4" role="tabpanel" tabindex="0" aria-labelledby="tab-why-4">Life gets in the way. Most roofers never follow up. A simple, helpful follow-up sequence keeps you top of mind.</div>
+                            <div class="tab-content hidden" id="panel-action-4" role="tabpanel" tabindex="0" aria-labelledby="tab-action-4">
                                 <p>If you don't hear back, follow this schedule:</p>
                                 <ul class="list-disc pl-5 space-y-2">
                                     <li><strong>Day 2 (SMS):</strong> "Hi [Name], just checking you received the quote we sent yesterday. Let me know if you have any questions. Thanks, [Your Name]."</li>
@@ -185,24 +218,44 @@
                      <div class="prose max-w-none prose-slate">
                        <p class="text-lg mb-6">Even when you lose a quote, there's a valuable opportunity to learn and potentially recover the job. This final step improves your process for the future and keeps the door open.</p>
                         <div class="tabs-container" data-step="5">
-                            <div class="border-b border-slate-200 mb-4">
-                                <nav class="flex space-x-4" aria-label="Tabs">
-                                    <button class="tab-button active" data-target="goal-5">The Goal</button>
-                                    <button class="tab-button" data-target="why-5">Why It Works</button>
-                                    <button class="tab-button" data-target="action-5">Action</button>
+                            <div class="border-b border-slate-200 mb-4" role="tablist" aria-label="Step 5 Details">
+                                <nav class="flex space-x-4">
+                                    <button class="tab-button" id="tab-goal-5" role="tab" aria-selected="true" aria-controls="panel-goal-5">The Goal</button>
+                                    <button class="tab-button" id="tab-why-5" role="tab" aria-selected="false" aria-controls="panel-why-5">Why It Works</button>
+                                    <button class="tab-button" id="tab-action-5" role="tab" aria-selected="false" aria-controls="panel-action-5">Action</button>
                                 </nav>
                             </div>
-                            <div class="tab-content" id="goal-5">Get feedback even if you lose the job.</div>
-                            <div class="tab-content hidden" id="why-5">This provides valuable market intelligence and occasionally revives a dead lead if their first choice falls through.</div>
-                            <div class="tab-content hidden" id="action-5">If you know they went with someone else, send one last email: "Hi [Name], thanks for the opportunity to quote. For our records, would you mind sharing what the deciding factor was? Your feedback is incredibly helpful. All the best with the project."</div>
+                            <div class="tab-content" id="panel-goal-5" role="tabpanel" tabindex="0" aria-labelledby="tab-goal-5">Get feedback even if you lose the job.</div>
+                            <div class="tab-content hidden" id="panel-why-5" role="tabpanel" tabindex="0" aria-labelledby="tab-why-5">This provides valuable market intelligence and occasionally revives a dead lead if their first choice falls through.</div>
+                            <div class="tab-content hidden" id="panel-action-5" role="tabpanel" tabindex="0" aria-labelledby="tab-action-5">If you know they went with someone else, send one last email: "Hi [Name], thanks for the opportunity to quote. For our records, would you mind sharing what the deciding factor was? Your feedback is incredibly helpful. All the best with the project."</div>
                         </div>
                     </div>
                 </section>
 
-                <section class="bg-amber-500 text-white rounded-xl shadow-lg p-8 text-center">
-                    <h2 class="text-3xl font-extrabold mb-3">Ready to Automate This Entire System?</h2>
-                    <p class="text-lg max-w-2xl mx-auto mb-6 opacity-90">This 5-step process is a proven winner. Imagine it running 24/7 for your business, capturing and converting leads while you focus on the job site. That's what RoofFlow AI does.</p>
-                    <a href="#" class="inline-block bg-white text-amber-600 font-bold py-3 px-8 rounded-lg text-lg hover:bg-slate-100 transition-colors duration-300 shadow-md">Discover How to Automate It</a>
+                <section id="cta-section" class="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-slate-200">
+                    <div class="text-center">
+                        <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-2">Ready to Automate This System?</h2>
+                        <p class="text-lg mb-6 max-w-2xl mx-auto text-slate-600">This blueprint is powerful, but automation is the key. Let's build a custom plan for your business in a free, 15-minute strategy call.</p>
+                    </div>
+                    <div class="max-w-md mx-auto">
+                        <form id="cta-form" class="bg-slate-100 p-6 rounded-lg">
+                            <div class="mb-4">
+                                <label for="cta-name" class="font-semibold block mb-2 text-slate-700">Name:</label>
+                                <input type="text" id="cta-name" name="name" placeholder="Enter your name" class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500" required>
+                            </div>
+                            <div class="mb-6">
+                                <label for="cta-email" class="font-semibold block mb-2 text-slate-700">Email Address:</label>
+                                <input type="email" id="cta-email" name="email" placeholder="Enter your best email" class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500" required>
+                            </div>
+                            <button type="submit" class="w-full p-4 bg-amber-500 text-white border-none font-bold text-lg rounded-md cursor-pointer hover:bg-amber-600 transition-colors duration-300 shadow-lg leading-tight flex items-center justify-center">
+                                <span class="button-text">
+                                    Get your "The 5-Step Blueprint to Convert More Quotes PDF"
+                                </span>
+                            </button>
+                        </form>
+                        <div id="cta-form-message" class="mt-4 text-center"></div>
+                        <p class="text-center text-xs text-slate-500 mt-4">🔒 We'll contact you to schedule your session. We never share your email.</p>
+                    </div>
                 </section>
             </main>
         </div>
@@ -210,48 +263,41 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // --- Enhanced Tab Functionality with Accessibility ---
     const tabContainers = document.querySelectorAll('.tabs-container');
+    
+    // Set initial active tab state for all containers
     tabContainers.forEach(container => {
-        const tabs = container.querySelectorAll('.tab-button');
-        const contents = container.querySelectorAll('.tab-content');
+        const firstTab = container.querySelector('.tab-button');
+        const firstPanel = container.querySelector('.tab-content');
+        firstTab.setAttribute('aria-selected', 'true');
+        firstPanel.classList.remove('hidden');
+    });
 
+    tabContainers.forEach(container => {
+        const tabs = container.querySelectorAll('[role="tab"]');
+        const panels = container.querySelectorAll('[role="tabpanel"]');
+        
         tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(item => item.classList.remove('active'));
-                tab.classList.add('active');
+            tab.addEventListener('click', (e) => {
+                // Deactivate all tabs and hide all panels in the current container
+                tabs.forEach(item => item.setAttribute('aria-selected', 'false'));
+                panels.forEach(panel => panel.classList.add('hidden'));
 
-                const targetId = tab.getAttribute('data-target');
-                contents.forEach(content => {
-                    if (content.id === targetId) {
-                        content.classList.remove('hidden');
-                    } else {
-                        content.classList.add('hidden');
-                    }
-                });
+                // Activate the clicked tab
+                const clickedTab = e.currentTarget;
+                clickedTab.setAttribute('aria-selected', 'true');
+
+                // Show the corresponding panel
+                const targetPanelId = clickedTab.getAttribute('aria-controls');
+                const targetPanel = document.getElementById(targetPanelId);
+                targetPanel.classList.remove('hidden');
+                targetPanel.focus(); // Improve keyboard navigation
             });
         });
     });
 
-    const style = document.createElement('style');
-    style.textContent = `
-        .tab-button {
-            padding: 8px 16px;
-            cursor: pointer;
-            font-semibold;
-            color: #475569;
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-        .tab-button:hover {
-            color: #1e293b;
-        }
-        .tab-button.active {
-            color: #f59e0b;
-            border-bottom-color: #f59e0b;
-        }
-    `;
-    document.head.appendChild(style);
-
+    // --- Chart.js Implementation ---
     const ctx = document.getElementById('conversionChart').getContext('2d');
     new Chart(ctx, {
         type: 'bar',
@@ -309,8 +355,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // --- Intersection Observer for Stepper Navigation ---
     const sections = document.querySelectorAll('.step-section');
     const navLinks = document.querySelectorAll('.step-link');
+
+    // Set initial active link on page load
+    if (navLinks.length > 0) {
+        navLinks[0].classList.add('active');
+    }
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -327,7 +380,59 @@ document.addEventListener('DOMContentLoaded', function() {
     sections.forEach(section => {
         observer.observe(section);
     });
+
+    // --- CTA Form Submission with Enhanced Feedback ---
+    const ctaForm = document.getElementById('cta-form');
+    const ctaMessageDiv = document.getElementById('cta-form-message');
+    const ctaSubmitButton = ctaForm.querySelector('button[type="submit"]');
+    const buttonTextSpan = ctaSubmitButton.querySelector('.button-text');
+
+    ctaForm.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        ctaMessageDiv.innerHTML = ''; // Clear previous messages
+
+        const webhookUrl = 'https://primary-production-58a3.up.railway.app/webhook/9f58fa98-ac8c-447e-92ea-f5fc589c3ada';
+        const name = document.getElementById('cta-name').value;
+        const email = document.getElementById('cta-email').value;
+
+        ctaSubmitButton.disabled = true;
+        const originalButtonHTML = buttonTextSpan.innerHTML;
+        ctaSubmitButton.innerHTML = `<div class="spinner"></div> Sending...`;
+
+        const data = {
+            name: name,
+            email: email,
+            offer: '15-Minute Blueprint Call'
+        };
+
+        try {
+            const response = await fetch(webhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                // Handle non-successful HTTP responses if needed
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const firstName = name.split(' ')[0];
+            ctaMessageDiv.innerHTML = `<p class="text-green-600 font-semibold">Thank you, ${firstName}! We'll be in touch shortly to schedule your call.</p>`;
+            ctaForm.reset();
+
+        } catch (error) {
+            console.error('Submission error:', error);
+            ctaMessageDiv.innerHTML = `<p class="text-red-600 font-semibold">An error occurred. Please try again in a moment.</p>`;
+        } finally {
+            ctaSubmitButton.disabled = false;
+            ctaSubmitButton.innerHTML = ''; // Clear spinner and text
+            ctaSubmitButton.appendChild(buttonTextSpan); // Restore original text content
+            buttonTextSpan.innerHTML = originalButtonHTML;
+        }
+    });
 });
 </script>
 </body>
 </html>
+
