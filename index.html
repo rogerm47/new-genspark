@@ -1,156 +1,333 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoofFlow AI - Free Report</title>
+    <title>Interactive Roofer's Blueprint</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutral Industrial -->
+    <!-- Application Structure Plan: The SPA is structured as an interactive vertical stepper to guide users through the 5-step blueprint. This design was chosen to make the process feel like a structured, actionable system rather than a passive document. Key interactions include a clickable stepper for navigation, tabs within each step's card to reduce cognitive load and encourage exploration, and a bar chart to visually emphasize the critical importance of Step 1. This user flow guides the roofer from understanding the problem to seeing the solution, culminating in a clear CTA for automation. -->
+    <!-- Visualization & Content Choices: 1. **5-Step Process**: Goal=Organize. Method=HTML/JS Vertical Stepper. Interaction=Click-to-scroll. Justification=Creates a clear, navigable user journey. 2. **Step Details (Goal/Why/Action)**: Goal=Inform. Method=HTML/JS Tabs. Interaction=Click-to-reveal. Justification=Prevents information overload. 3. **Response Time Impact**: Goal=Compare/Change. Method=Chart.js Bar Chart. Interaction=Hover tooltips. Justification=Provides powerful visual proof for the urgency of speed, making the advice more impactful. 4. **Final CTA**: Goal=Action. Method=Styled HTML button. Interaction=Click. Justification=Clearly separates education from the sales pitch. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .form-container {
-            background-color: #f0f0f0;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+        body { font-family: 'Inter', sans-serif; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 300px; max-height: 400px; }
+        @media (min-width: 768px) { .chart-container { height: 350px; } }
+        .step-link.active .step-circle { background-color: #f59e0b; color: #ffffff; border-color: #f59e0b; }
+        .step-link.active .step-text { font-weight: 700; color: #f59e0b; }
+        .step-link .step-circle { transition: all 0.3s ease; }
+        .step-link .step-text { transition: all 0.3s ease; }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-slate-50 text-slate-800">
 
-    <div class="container mx-auto px-4 py-8 md:py-16">
+    <div class="container mx-auto max-w-7xl px-4 py-8 md:py-12">
 
-        <!-- Header: Your RoofFlow AI Logo -->
-        <header class="text-center mb-12">
-            <img src="roofflow (1).png" alt="RoofFlow AI Logo" class="mx-auto h-24 w-auto">
+        <header class="text-center mb-12 md:mb-16">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">The 5-Step Blueprint to Convert More Quotes</h1>
+            <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-600">An interactive guide to stop losing leads and start winning more profitable roofing jobs. Follow this system to become the first and best choice for homeowners.</p>
         </header>
 
-        <main>
-            <!-- Main Headline -->
-            <h1 class="text-3xl md:text-5xl font-extrabold text-center mb-4 text-gray-900">
-                FREE REPORT: The Leaky Bucket Secret
-            </h1>
-
-            <!-- Sub-headline -->
-            <p class="text-lg md:text-xl text-center text-gray-600 mb-12 max-w-4xl mx-auto">
-                Discover The #1 Reason UK Roofers Lose Profitable Jobs To Slower, Cheaper Competitors... And How To Fix It In 48 Hours.
-            </p>
-
-            <div class="flex justify-center">
-
-                <!-- Right Side: Bullet Points & The Form -->
-                <div class="w-full max-w-2xl">
-                    <h2 class="text-2xl font-bold mb-4">Inside this free report, you'll discover:</h2>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-start">
-                            <span class="text-green-500 mr-3 mt-1">✅</span>
-                            <span><strong>The "Golden 5 Minutes":</strong> Why your chance of winning a new job drops by 80% if you don't respond within this tiny window (and how your competitors are ruthlessly exploiting it).</span>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+            
+            <aside class="lg:col-span-3 lg:sticky top-8 self-start">
+                <nav id="stepper-nav" class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
+                    <h3 class="font-bold text-lg mb-4 text-slate-900">Blueprint Steps</h3>
+                    <ol class="space-y-4">
+                        <li>
+                            <a href="#step1" class="step-link group flex items-center space-x-3">
+                                <span class="step-circle h-8 w-8 flex items-center justify-center rounded-full border-2 border-slate-300 bg-slate-100 text-slate-500 font-bold group-hover:border-amber-500">1</span>
+                                <span class="step-text font-semibold text-slate-600 group-hover:text-amber-600">Golden Rule</span>
+                            </a>
                         </li>
-                        <li class="flex items-start">
-                            <span class="text-green-500 mr-3 mt-1">✅</span>
-                            <span><strong>The £3,550 Mistake:</strong> The real, painful cost of a single missed website lead. We'll show you how to calculate exactly what this is costing your business each month.</span>
+                        <li>
+                            <a href="#step2" class="step-link group flex items-center space-x-3">
+                                <span class="step-circle h-8 w-8 flex items-center justify-center rounded-full border-2 border-slate-300 bg-slate-100 text-slate-500 font-bold group-hover:border-amber-500">2</span>
+                                <span class="step-text font-semibold text-slate-600 group-hover:text-amber-600">First Contact</span>
+                            </a>
                         </li>
-                        <li class="flex items-start">
-                             <span class="text-green-500 mr-3 mt-1">✅</span>
-                            <span><strong>The Unfair Advantage:</strong> The simple, automated system that makes you the first contractor they speak to, every single time, even if you're up on a roof or pricing a job.</span>
+                        <li>
+                            <a href="#step3" class="step-link group flex items-center space-x-3">
+                                <span class="step-circle h-8 w-8 flex items-center justify-center rounded-full border-2 border-slate-300 bg-slate-100 text-slate-500 font-bold group-hover:border-amber-500">3</span>
+                                <span class="step-text font-semibold text-slate-600 group-hover:text-amber-600">Quote Package</span>
+                            </a>
                         </li>
-                    </ul>
+<li>
+                            <a href="#step4" class="step-link group flex items-center space-x-3">
+                                <span class="step-circle h-8 w-8 flex items-center justify-center rounded-full border-2 border-slate-300 bg-slate-100 text-slate-500 font-bold group-hover:border-amber-500">4</span>
+                                <span class="step-text font-semibold text-slate-600 group-hover:text-amber-600">Follow-Up</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#step5" class="step-link group flex items-center space-x-3">
+                                <span class="step-circle h-8 w-8 flex items-center justify-center rounded-full border-2 border-slate-300 bg-slate-100 text-slate-500 font-bold group-hover:border-amber-500">5</span>
+                                <span class="step-text font-semibold text-slate-600 group-hover:text-amber-600">Lead Revival</span>
+                            </a>
+                        </li>
+                    </ol>
+                </nav>
+            </aside>
 
-                    <p class="font-semibold mb-4 text-center md:text-left">Enter your details below to get instant access:</p>
-
-                    <div class="bg-gray-200 p-6 rounded-lg shadow-inner">
-                        <form id="optin-form">
-                            <div class="mb-4">
-                                <label for="fname" class="font-bold block mb-2">First Name:</label>
-                                <input type="text" id="fname" name="fname" placeholder="Enter your first name" class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+            <main class="lg:col-span-9 space-y-12">
+                
+                <section id="step1" class="step-section bg-white p-6 md:p-8 rounded-xl shadow-lg border border-slate-200">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-6">Step 1: The "5-Minute" Golden Rule</h2>
+                    <div class="prose max-w-none prose-slate">
+                        <p class="text-lg mb-6">The single most important factor in winning a new job is speed. This section breaks down why every second counts and what you must do to get ahead of your competition instantly.</p>
+                        
+                        <div class="bg-slate-100 rounded-lg p-6 mb-6">
+                             <p class="text-center font-semibold text-slate-700 mb-4">How Response Time Impacts Your Chance to Win a Job</p>
+                            <div class="chart-container">
+                                <canvas id="conversionChart"></canvas>
                             </div>
-                            <div class="mb-6">
-                                <label for="email" class="font-bold block mb-2">Primary Email Address:</label>
-                                <input type="email" id="email" name="email" placeholder="Enter your best email address" class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+                        </div>
+
+                        <div class="tabs-container" data-step="1">
+                            <div class="border-b border-slate-200 mb-4">
+                                <nav class="flex space-x-4" aria-label="Tabs">
+                                    <button class="tab-button active" data-target="goal-1">The Goal</button>
+                                    <button class="tab-button" data-target="why-1">Why It Works</button>
+                                    <button class="tab-button" data-target="action-1">Action</button>
+                                </nav>
                             </div>
-                            <button type="submit" class="w-full p-4 bg-orange-600 text-white border-none font-bold text-lg rounded-md cursor-pointer hover:bg-orange-700 transition-colors duration-300 shadow-lg">
-                                GET THE FREE REPORT NOW!
-                            </button>
-                        </form>
-                         <div id="form-message" class="mt-4 text-center"></div>
+                            <div class="tab-content" id="goal-1">Respond to every single website enquiry in under 5 minutes.</div>
+                            <div class="tab-content hidden" id="why-1">The first roofer to respond is statistically the most likely to win the job. Homeowners want speed. Being first makes you seem the most professional and eager for their business.</div>
+                            <div class="tab-content hidden" id="action-1">Set up instant email and SMS notifications from your website form so you or your team are alerted the second an enquiry comes in.</div>
+                        </div>
                     </div>
-                    <p class="text-center text-xs text-gray-500 mt-4">🔒 100% Secure. We never share your email.</p>
-                </div>
-            </div>
-        </main>
+                </section>
+
+                <section id="step2" class="step-section bg-white p-6 md:p-8 rounded-xl shadow-lg border border-slate-200">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-6">Step 2: The "Triple Touch" First Contact</h2>
+                    <div class="prose max-w-none prose-slate">
+                       <p class="text-lg mb-6">Once you get a lead, making immediate and effective contact is crucial. A multi-channel approach ensures your message is received and positions you as a proactive professional.</p>
+                        <div class="tabs-container" data-step="2">
+                            <div class="border-b border-slate-200 mb-4">
+                                <nav class="flex space-x-4" aria-label="Tabs">
+                                    <button class="tab-button active" data-target="goal-2">The Goal</button>
+                                    <button class="tab-button" data-target="why-2">Why It Works</button>
+                                    <button class="tab-button" data-target="action-2">Action</button>
+                                </nav>
+                            </div>
+                            <div class="tab-content" id="goal-2">Contact the new lead via three different methods immediately.</div>
+                            <div class="tab-content hidden" id="why-2">People have preferred communication styles. Covering all bases ensures they see your message.</div>
+                            <div class="tab-content hidden" id="action-2">
+                                <ul class="list-disc pl-5 space-y-2">
+                                    <li><strong>Send an Automated Email:</strong> "Thanks for your quote request for [Their Address]. We're reviewing the details and will call you in the next 5-10 minutes..."</li>
+                                    <li><strong>Send an Automated SMS:</strong> "Hi [Name], just got your roofing quote request. Roger from [Your Company] here. I'll call you shortly from this number."</li>
+                                    <li><strong>Make the Phone Call:</strong> Call them within 5-10 minutes.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="step3" class="step-section bg-white p-6 md:p-8 rounded-xl shadow-lg border border-slate-200">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-6">Step 3: The "Certainty" Quote Package</h2>
+                     <div class="prose max-w-none prose-slate">
+                       <p class="text-lg mb-6">Your quote is your most important sales document. It must do more than just show a price—it must build confidence, eliminate risk, and make the homeowner feel certain that you are the right choice.</p>
+                        <div class="tabs-container" data-step="3">
+                            <div class="border-b border-slate-200 mb-4">
+                                <nav class="flex space-x-4" aria-label="Tabs">
+                                    <button class="tab-button active" data-target="goal-3">The Goal</button>
+                                    <button class="tab-button" data-target="why-3">Why It Works</button>
+                                    <button class="tab-button" data-target="action-3">Action</button>
+                                </nav>
+                            </div>
+                            <div class="tab-content" id="goal-3">Your quote should do more than just list a price; it should build trust and eliminate risk for the homeowner.</div>
+                            <div class="tab-content hidden" id="why-3">Homeowners are scared of being ripped off. A professional package makes your price seem more justified and makes you look like the safest choice.</div>
+                            <div class="tab-content hidden" id="action-3">
+                                <p>Always send your quote as a PDF that includes:</p>
+                                <ul class="list-disc pl-5 space-y-2">
+                                    <li>Your Company Details & Logo</li>
+                                    <li>The Client's Details</li>
+                                    <li>A Clear Scope of Work</li>
+                                    <li>Proof of Insurance</li>
+                                    <li>Photos of Past Work / Customer Testimonials</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="step4" class="step-section bg-white p-6 md:p-8 rounded-xl shadow-lg border border-slate-200">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-6">Step 4: The "No-Brainer" Follow-Up Sequence</h2>
+                    <div class="prose max-w-none prose-slate">
+                       <p class="text-lg mb-6">Most jobs are lost due to a lack of follow-up. A simple, systematic, and non-pushy follow-up sequence keeps you top-of-mind and shows the client you are organized and attentive.</p>
+                        <div class="tabs-container" data-step="4">
+                            <div class="border-b border-slate-200 mb-4">
+                                <nav class="flex space-x-4" aria-label="Tabs">
+                                    <button class="tab-button active" data-target="goal-4">The Goal</button>
+                                    <button class="tab-button" data-target="why-4">Why It Works</button>
+                                    <button class="tab-button" data-target="action-4">Action</button>
+                                </nav>
+                            </div>
+                            <div class="tab-content" id="goal-4">Follow up systematically without being annoying.</div>
+                            <div class="tab-content hidden" id="why-4">Life gets in the way. Most roofers never follow up. A simple, helpful follow-up sequence keeps you top of mind.</div>
+                            <div class="tab-content hidden" id="action-4">
+                                <p>If you don't hear back, follow this schedule:</p>
+                                <ul class="list-disc pl-5 space-y-2">
+                                    <li><strong>Day 2 (SMS):</strong> "Hi [Name], just checking you received the quote we sent yesterday. Let me know if you have any questions. Thanks, [Your Name]."</li>
+                                    <li><strong>Day 4 (Email):</strong> "Subject: Any questions about your roofing quote?" - Briefly re-attach the quote and ask if they need any clarification.</li>
+                                    <li><strong>Day 7 (Phone Call):</strong> One final, friendly call to see if they've made a decision.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="step5" class="step-section bg-white p-6 md:p-8 rounded-xl shadow-lg border border-slate-200">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-6">Step 5: The "Lost Lead" Revival Email</h2>
+                     <div class="prose max-w-none prose-slate">
+                       <p class="text-lg mb-6">Even when you lose a quote, there's a valuable opportunity to learn and potentially recover the job. This final step improves your process for the future and keeps the door open.</p>
+                        <div class="tabs-container" data-step="5">
+                            <div class="border-b border-slate-200 mb-4">
+                                <nav class="flex space-x-4" aria-label="Tabs">
+                                    <button class="tab-button active" data-target="goal-5">The Goal</button>
+                                    <button class="tab-button" data-target="why-5">Why It Works</button>
+                                    <button class="tab-button" data-target="action-5">Action</button>
+                                </nav>
+                            </div>
+                            <div class="tab-content" id="goal-5">Get feedback even if you lose the job.</div>
+                            <div class="tab-content hidden" id="why-5">This provides valuable market intelligence and occasionally revives a dead lead if their first choice falls through.</div>
+                            <div class="tab-content hidden" id="action-5">If you know they went with someone else, send one last email: "Hi [Name], thanks for the opportunity to quote. For our records, would you mind sharing what the deciding factor was? Your feedback is incredibly helpful. All the best with the project."</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-amber-500 text-white rounded-xl shadow-lg p-8 text-center">
+                    <h2 class="text-3xl font-extrabold mb-3">Ready to Automate This Entire System?</h2>
+                    <p class="text-lg max-w-2xl mx-auto mb-6 opacity-90">This 5-step process is a proven winner. Imagine it running 24/7 for your business, capturing and converting leads while you focus on the job site. That's what RoofFlow AI does.</p>
+                    <a href="#" class="inline-block bg-white text-amber-600 font-bold py-3 px-8 rounded-lg text-lg hover:bg-slate-100 transition-colors duration-300 shadow-md">Discover How to Automate It</a>
+                </section>
+            </main>
+        </div>
     </div>
 
-    <script>
-        const form = document.getElementById('optin-form');
-        const messageDiv = document.getElementById('form-message');
-        const submitButton = form.querySelector('button[type="submit"]');
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const tabContainers = document.querySelectorAll('.tabs-container');
+    tabContainers.forEach(container => {
+        const tabs = container.querySelectorAll('.tab-button');
+        const contents = container.querySelectorAll('.tab-content');
 
-        form.addEventListener('submit', async function(event) {
-            event.preventDefault(); // Stop the form from submitting the traditional way
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(item => item.classList.remove('active'));
+                tab.classList.add('active');
 
-            const webhookUrl = 'https://primary-production-58a3.up.railway.app/webhook/9f58fa98-ac8c-447e-92ea-f5fc589c3ada';
-            const firstName = document.getElementById('fname').value;
-            const email = document.getElementById('email').value;
-
-            // Disable button and show loading text to prevent multiple submissions
-            submitButton.disabled = true;
-            submitButton.textContent = 'SENDING...';
-
-            const data = {
-                firstName: firstName,
-                email: email
-            };
-
-            try {
-                const response = await fetch(webhookUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
+                const targetId = tab.getAttribute('data-target');
+                contents.forEach(content => {
+                    if (content.id === targetId) {
+                        content.classList.remove('hidden');
+                    } else {
+                        content.classList.add('hidden');
+                    }
                 });
+            });
+        });
+    });
 
-                if (response.ok) {
-                    // Webhook received the data successfully
-                    messageDiv.innerHTML = `<p class="text-green-600 font-semibold">Thank you, ${firstName}! Your report is on its way.</p>`;
-                    messageDiv.classList.remove('text-red-600');
-                    messageDiv.classList.add('text-green-600');
-                    form.reset();
-                } else {
-                    // Webhook returned an error
-                    const errorData = await response.text();
-                    messageDiv.innerHTML = `<p class="text-red-600 font-semibold">Oops! Something went wrong. Please try again.</p>`;
-                    messageDiv.classList.remove('text-green-600');
-                    messageDiv.classList.add('text-red-600');
-                    console.error('Webhook error:', errorData);
-                }
-            } catch (error) {
-                // This 'catch' block will often run into a TypeError due to a CORS issue.
-                // CORS (Cross-Origin Resource Sharing) is a browser security feature.
-                // To FIX THIS: The server hosting the webhook (at railway.app) must be configured
-                // to send an 'Access-Control-Allow-Origin' header that allows requests
-                // from the domain where this page is viewed.
-                // For n8n webhooks, you may need to adjust CORS settings in your environment variables
-                // or the configuration for the webserver running n8n.
+    const style = document.createElement('style');
+    style.textContent = `
+        .tab-button {
+            padding: 8px 16px;
+            cursor: pointer;
+            font-semibold;
+            color: #475569;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .tab-button:hover {
+            color: #1e293b;
+        }
+        .tab-button.active {
+            color: #f59e0b;
+            border-bottom-color: #f59e0b;
+        }
+    `;
+    document.head.appendChild(style);
 
-                let errorMessage = 'Could not connect. Please check your internet connection and try again.';
-                if (error instanceof TypeError) {
-                    errorMessage = 'Submission failed. This is likely a CORS configuration issue on the webhook server. Please check the browser console (F12) for more details.';
+    const ctx = document.getElementById('conversionChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['< 5 Mins', '30 Mins', '1 Hour', '24 Hours'],
+            datasets: [{
+                label: 'Chance of Winning Job (%)',
+                data: [80, 45, 25, 5],
+                backgroundColor: [
+                    'rgba(52, 211, 153, 0.6)',
+                    'rgba(251, 191, 36, 0.6)',
+                    'rgba(251, 146, 60, 0.6)',
+                    'rgba(239, 68, 68, 0.6)'
+                ],
+                borderColor: [
+                    'rgba(52, 211, 153, 1)',
+                    'rgba(251, 191, 36, 1)',
+                    'rgba(251, 146, 60, 1)',
+                    'rgba(239, 68, 68, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    title: {
+                        display: true,
+                        text: 'Likelihood to Convert (%)'
+                    }
+                },
+                x: {
+                   title: {
+                        display: true,
+                        text: 'Response Time'
+                    }
                 }
-                
-                messageDiv.innerHTML = `<p class="text-red-600 font-semibold">${errorMessage}</p>`;
-                messageDiv.classList.remove('text-green-600');
-                messageDiv.classList.add('text-red-600');
-                console.error('Fetch error:', error);
-            } finally {
-                // Re-enable the button and restore original text
-                submitButton.disabled = false;
-                submitButton.textContent = 'GET THE FREE REPORT NOW!';
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return ` ${context.dataset.label}: ${context.raw}%`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+    
+    const sections = document.querySelectorAll('.step-section');
+    const navLinks = document.querySelectorAll('.step-link');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === entry.target.id) {
+                        link.classList.add('active');
+                    }
+                });
             }
         });
-    </script>
+    }, { rootMargin: "-50% 0px -50% 0px", threshold: 0 });
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+});
+</script>
 </body>
 </html>
-
